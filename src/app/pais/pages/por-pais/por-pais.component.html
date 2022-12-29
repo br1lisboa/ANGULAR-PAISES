@@ -15,7 +15,7 @@
     No se encontro nada con el termino {{termino}}
 </div>
 
-<div *ngIf="!hayError" class="row">
+<div *ngIf="paises.length > 0" class="row">
     <div class="col">
         <table class="table table-hover">
             <thead>
@@ -26,13 +26,15 @@
                 <th></th>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>bandera</td>
-                    <td>nombre</td>
-                    <td>123435465</td>
+                <tr *ngFor="let item of paises; let i = index">
+                    <td>{{i + 1}}</td>
                     <td>
-                        <a href="/pais/cri">Ver...</a>
+                        <img src={{item.flags.svg}} class=" small-flag" alt="Bandera">
+                    </td>
+                    <td>{{item.name.common}}</td>
+                    <td>{{item.population | number}}</td>
+                    <td>
+                        <a [routerLink]="['/pais',item.altSpellings[0]]">Ver...</a>
                     </td>
                 </tr>
             </tbody>
